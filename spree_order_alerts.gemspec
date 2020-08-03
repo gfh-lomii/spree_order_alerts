@@ -12,8 +12,8 @@ Gem::Specification.new do |s|
   s.description = 'Add (optional) extension description here'
   s.required_ruby_version = '>= 2.7.1'
 
-  s.author    = 'chinoxchen'
-  s.email     = 'chienfu.udp@gmail.com'
+  s.author    = 'maxilopezramirez'
+  s.email     = 'maxi.lopez.ramirez@gmail.com'
   s.homepage  = 'https://github.com/chinoxchen-spree-contrib/spree_order_alerts'
   s.license = 'BSD-3-Clause'
 
