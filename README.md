@@ -1,1 +1,1 @@
-# order_alerts
+# spree_oprder_alerts
