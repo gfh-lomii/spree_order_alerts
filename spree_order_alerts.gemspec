@@ -12,9 +12,9 @@ Gem::Specification.new do |s|
   s.description = 'Add (optional) extension description here'
   s.required_ruby_version = '>= 2.2.7'
 
-  s.author    = 'You'
-  s.email     = 'you@example.com'
-  s.homepage  = 'https://github.com/your-github-handle/spree_order_alerts'
+  s.author    = 'maxilopezramirez'
+  s.email     = 'maxi.lopez.ramirez@gmail.com'
+  s.homepage  = 'https://github.com/chinoxchen-spree-contrib/spree_order_alerts'
   s.license = 'BSD-3-Clause'
 
   s.files       = `git ls-files`.split("\n").reject { |f| f.match(/^spec/) && !f.match(/^spec\/fixtures/) }
