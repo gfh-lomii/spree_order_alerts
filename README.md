@@ -7,7 +7,7 @@ Introduction goes here.
 1. Add this extension to your Gemfile with this line:
 
     ```ruby
-    gem 'spree_order_alerts', github: '[your-github-handle]/spree_order_alerts'
+    gem 'spree_order_alerts', github: 'chinoxchen-spree-contrib/spree_order_alerts'
     ```
 
 2. Install the gem using Bundler
