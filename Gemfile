@@ -6,7 +6,6 @@ git_source(:github) do |repo_name|
 end
 
 gem 'spree', github: 'spree/spree', branch: 'master'
-#gem 'sprockets', '~> 4.0.2'
 gem 'rails-controller-testing'
 
 gemspec

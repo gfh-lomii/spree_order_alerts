@@ -1,4 +1,4 @@
-# SpreePromotionAddress
+# SpreeOrderAlerts
 
 Introduction goes here.
 

@@ -1,8 +1,8 @@
-module SpreeSimpleOrderAlerts
+module SpreeOrderAlerts
   class Engine < Rails::Engine
     require 'spree/core'
     isolate_namespace Spree
-    engine_name 'spree_simple_order_alerts'
+    engine_name 'spree_order_alerts'
 
     # use rspec for tests
     config.generators do |g|

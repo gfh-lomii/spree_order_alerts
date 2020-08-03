@@ -1,7 +1,7 @@
-module SpreeProducers
+module SpreeOrderAlerts
   module_function
 
-  # Returns the version of the currently loaded SpreeProducers as a
+  # Returns the version of the currently loaded SpreeOrderAlerts as a
   # <tt>Gem::Version</tt>.
   def version
     Gem::Version.new VERSION::STRING
