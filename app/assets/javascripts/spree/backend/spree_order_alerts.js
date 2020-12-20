@@ -16,7 +16,7 @@ $(document).ready(function () {
           '&q[completed_at_lt]' +
           '&q[completed_at_not_null]=1&q[created_at_gt]' +
           '&q[created_at_lt]' +
-          '&q[s]=completed_at+desc&per_page=50',
+          '&q[s]=completed_at+desc&per_page=25',
         data: {
           token: Spree.api_key
         }
