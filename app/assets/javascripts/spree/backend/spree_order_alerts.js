@@ -52,7 +52,7 @@ function activeNotification() {
             audio.play();
             orderAlert.newOrder = true;
             setTimeout(() => {
-              //location.reload();
+              location.reload();
             }, 4000)
 
           }
