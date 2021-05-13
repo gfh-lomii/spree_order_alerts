@@ -24,7 +24,9 @@ $(document).ready(function () {
 });
 
 function activeNotification() {
-  var st_id = $('#q_search_by_stock_location_id').val() || '';
+  var st_id = $('#q_search_by_stock_location_id').val();
+  var st_filter = st_id === 0 ? '' : '&q[search_by_stock_location_id]= ' + st_id
+
   show_flash('success', 'Alerta activa');
   var orderAlert = {};
   orderAlert.appendSource = false;
@@ -36,7 +38,7 @@ function activeNotification() {
         '&q[completed_at_lt]' +
         '&q[completed_at_not_null]=1&q[created_at_gt]' +
         '&q[created_at_lt]' +
-        '&q[search_by_stock_location_id]= ' + st_id +
+         st_filter +
         '&q[s]=completed_at+desc&per_page=25',
       data: {
         token: Spree.api_key
