@@ -24,9 +24,10 @@ $(document).ready(function () {
 });
 
 function activeNotification() {
-  var st_id = $('#q_search_by_stock_location_id').val();
+  var stock_location = document.cookie.match(new RegExp('(^| )' + 'stock_location' + '=([^;]+)'));
+  if (stock_location === null) return;
+  var st_id = stock_location === null ? '' : stock_location[2]
   var st_filter = st_id === '0' ? '' : '&q[search_by_stock_location_id]= ' + st_id
-
   show_flash('success', 'Alerta activa');
   var orderAlert = {};
   orderAlert.appendSource = false;
@@ -52,7 +53,7 @@ function activeNotification() {
             $('body').append('<audio id="myAudio" style="display: none;" controls autoplay><source src="https://freesound.org/data/previews/171/171671_2437358-lq.mp3" crossorigin="anonymous" type="audio/mpeg"></audio>');
             orderAlert.appendSource = true;
           } else {
-            show_flash('error', 'Nueva Orden');
+            show_flash('error', 'Nueva Orden '+order.number);
             audio.play();
             orderAlert.newOrder = true;
             setTimeout(() => {
