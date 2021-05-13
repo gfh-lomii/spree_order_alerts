@@ -25,9 +25,9 @@ $(document).ready(function () {
 
 function activeNotification() {
   var stock_location = document.cookie.match(new RegExp('(^| )' + 'stock_location' + '=([^;]+)'));
-  if (stock_location === null) return;
+  if (stock_location === null || stock_location === undefined) return;
   var st_id = stock_location === null ? '' : stock_location[2]
-  var st_filter = st_id === '0' ? '' : '&q[search_by_stock_location_id]= ' + st_id
+  var st_filter = st_id === '0' ? '' : '&q[search_by_stock_location_id]=' + st_id
   show_flash('success', 'Alerta activa');
   var orderAlert = {};
   orderAlert.appendSource = false;
