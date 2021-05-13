@@ -25,7 +25,7 @@ $(document).ready(function () {
 
 function activeNotification() {
   var st_id = $('#q_search_by_stock_location_id').val();
-  var st_filter = st_id === 0 ? '' : '&q[search_by_stock_location_id]= ' + st_id
+  var st_filter = st_id === '0' ? '' : '&q[search_by_stock_location_id]= ' + st_id
 
   show_flash('success', 'Alerta activa');
   var orderAlert = {};
