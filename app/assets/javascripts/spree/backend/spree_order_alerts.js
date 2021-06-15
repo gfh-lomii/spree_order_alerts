@@ -26,7 +26,6 @@ $(document).ready(function () {
   if (admin_orders_index_search === 0) {
     $('#active_alert').addClass('d-none');
     $('#disable_alert').addClass('d-none');
-    return;
   }
 });
 
