@@ -2,8 +2,9 @@ $(document).ready(function () {
   // add order style
   $('.badge-ready, .badge-pending').closest('[data-hook="admin_orders_index_rows"]').addClass('ready-order-row');
 
+  var admin_orders_index_search = document.querySelectorAll('[data-hook="admin_orders_index_search"]').length
   const isAlertActive = !!localStorage.getItem('spree_order_alert');
-  if (isAlertActive) {
+  if (isAlertActive && (admin_orders_index_search === 1)) {
     $('.page-actions').prepend('<button class="btn btn-danger" id="disable_alert"> Desctivar Alerta</button>');
     activeNotification()
   } else {
@@ -20,6 +21,12 @@ $(document).ready(function () {
       localStorage.setItem('spree_order_alert', true);
       window.location.reload();
     });
+  }
+
+  if (admin_orders_index_search === 0) {
+    $('#active_alert').addClass('d-none');
+    $('#disable_alert').addClass('d-none');
+    return;
   }
 });
 
