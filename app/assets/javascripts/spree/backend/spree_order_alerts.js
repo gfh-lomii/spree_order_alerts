@@ -2,13 +2,16 @@ $(document).ready(function () {
   // add order style
   $('.badge-ready, .badge-pending').closest('[data-hook="admin_orders_index_rows"]').addClass('ready-order-row');
 
-  var admin_orders_index_search = document.querySelectorAll('[data-hook="admin_orders_index_search"]').length
   const isAlertActive = !!localStorage.getItem('spree_order_alert');
-  if (isAlertActive && (admin_orders_index_search === 1)) {
-    $('.page-actions').prepend('<button class="btn btn-danger" id="disable_alert"> Desctivar Alerta</button>');
+
+  const is_order_index_page = document.querySelector('[data-hook="admin_orders_management"]')
+  if(is_order_index_page) {
+    const button = isAlertActive ? '<button class="btn btn-danger" id="disable_alert"> Desctivar Alerta</button>' : '<button class="btn btn-danger" id="active_alert"> Activar Alerta</button>'
+    $('.page-actions').prepend(button);
+  }
+
+  if (isAlertActive) {
     activeNotification()
-  } else {
-    $('.page-actions').prepend('<button class="btn btn-danger" id="active_alert"> Activar Alerta</button>');
   }
 
   if (!!$('#listing_orders').length) {
@@ -21,11 +24,6 @@ $(document).ready(function () {
       localStorage.setItem('spree_order_alert', true);
       window.location.reload();
     });
-  }
-
-  if (admin_orders_index_search === 0) {
-    $('#active_alert').addClass('d-none');
-    $('#disable_alert').addClass('d-none');
   }
 });
 
@@ -62,10 +60,13 @@ function activeNotification() {
             show_flash('error', 'Nueva Orden '+order.number);
             audio.play();
             orderAlert.newOrder = true;
-            setTimeout(() => {
-              location.reload();
-            }, 4000)
-
+            // reload only on orders index page
+            const is_order_index_page = document.querySelector('[data-hook="admin_orders_management"]')
+            if(is_order_index_page) {
+              setTimeout(() => {
+                location.reload();
+              }, 4000)
+            }
           }
         } else if (data.orders.every(function (order) {
           return order.shipment_state === 'shipped'
