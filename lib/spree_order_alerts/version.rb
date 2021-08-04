@@ -9,7 +9,7 @@ module SpreeOrderAlerts
 
   module VERSION
     MAJOR = 0
-    MINOR = 0
+    MINOR = 1
     TINY  = 10
     PRE   = 'alpha'.freeze
 
