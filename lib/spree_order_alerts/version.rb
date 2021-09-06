@@ -10,7 +10,7 @@ module SpreeOrderAlerts
   module VERSION
     MAJOR = 0
     MINOR = 0
-    TINY  = 12
+    TINY  = 13
     PRE   = 'alpha'.freeze
 
     STRING = [MAJOR, MINOR, TINY, PRE].compact.join('.')

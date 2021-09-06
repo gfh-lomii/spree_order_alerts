@@ -79,11 +79,8 @@ function activeNotification() {
         }
       })
     }).fail(function (message) {
-      if (message.responseJSON['error']) {
-        show_flash('error', message.responseJSON['error'])
-      } else {
-        show_flash('error', 'Ha ocurrido un error inesperado.')
-      }
+      if (message && message.status !== 0)
+        show_flash('error', message.statusText)
     })
   }, 6000);
 }
