@@ -52,7 +52,7 @@ function activeNotification() {
       orderAlert.newOrder = false;
       data.orders.forEach(function (order) {
         var audio = document.getElementById("myAudio");
-        if (order.payment_state === 'paid' && (order.shipment_state !== 'shipped' &&
+        if (order.payment_state === 'paid' && (order.shipment_state !== 'shipped' ||
           order.journey_state === null || order.journey_state === 'estimated' ||
           order.journey_state === 'hire' || order.journey_state === 'not found' ||
           order.journey_state === 'rider cancel' || order.journey_state === 'no show' ||
