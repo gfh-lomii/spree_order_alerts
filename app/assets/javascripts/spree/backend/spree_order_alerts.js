@@ -52,11 +52,7 @@ function activeNotification() {
       orderAlert.newOrder = false;
       data.orders.forEach(function (order) {
         var audio = document.getElementById("myAudio");
-        if (order.payment_state === 'paid' && (order.shipment_state !== 'shipped' ||
-          order.journey_state === null || order.journey_state === 'estimated' ||
-          order.journey_state === 'hire' || order.journey_state === 'not found' ||
-          order.journey_state === 'rider cancel' || order.journey_state === 'no show' ||
-          order.journey_state === 'driver cancel')) {
+        if (order.payment_state === 'paid' && order.shipment_state !== 'shipped' && order.journey_state === null) {
           if (!orderAlert.appendSource) {
             $('body').append('<audio id="myAudio" style="display: none;" controls autoplay><source src="https://freesound.org/data/previews/171/171671_2437358-lq.mp3" crossorigin="anonymous" type="audio/mpeg"></audio>');
             orderAlert.appendSource = true;
