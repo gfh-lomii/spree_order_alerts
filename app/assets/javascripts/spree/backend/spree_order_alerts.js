@@ -30,11 +30,13 @@ $(document).ready(function () {
 function activeNotification() {
   var stock_location = document.cookie.match(new RegExp('(^| )' + 'stock_location' + '=([^;]+)'));
   if (stock_location === null || stock_location === undefined) return;
+
   var st_id = stock_location === null ? '' : stock_location[2]
   var st_filter = st_id === '0' ? '' : '&q[search_by_stock_location_id]=' + st_id
   show_flash('success', 'Alerta activa');
   var orderAlert = {};
   orderAlert.appendSource = false;
+  orderAlert.appendSourceJourney = false
   setInterval(function () {
     $.ajax({
       type: 'GET',
@@ -50,9 +52,21 @@ function activeNotification() {
       }
     }).done(function (data) {
       orderAlert.newOrder = false;
+      orderAlert.driverArrived = false
       data.orders.forEach(function (order) {
-        var audio = document.getElementById("myAudio");
+        if(order.payment_state === 'paid' && order.taked_order === true && order.journey_state === 'arrived') {
+          if (!orderAlert.appendSourceJourney) {
+            $('body').append('<audio id="myAudioJourney" style="display: none;" controls autoplay><source src="https://freesound.org/data/previews/254/254678_1835926-lq.mp3" crossorigin="anonymous" type="audio/mpeg"></audio>');
+            orderAlert.appendSourceJourney = true;
+          }
+          var audio_journey = document.getElementById("myAudioJourney")
+          show_flash('error', 'Conductor ha llegado a tienda. Orden '+order.number);
+          audio_journey.play();
+          orderAlert.driverArrived = true;
+        }
+
         if (order.payment_state === 'paid' && order.taked_order !== true) {
+          var audio = document.getElementById("myAudio");
           if (!orderAlert.appendSource) {
             $('body').append('<audio id="myAudio" style="display: none;" controls autoplay><source src="https://freesound.org/data/previews/171/171671_2437358-lq.mp3" crossorigin="anonymous" type="audio/mpeg"></audio>');
             orderAlert.appendSource = true;
