@@ -60,7 +60,7 @@ function activeNotification() {
             orderAlert.appendSourceJourney = true;
           }
           var audio_journey = document.getElementById("myAudioJourney")
-          show_flash('error', 'Conductor ha llegado a tienda. Orden '+order.number);
+          show_flash('alert', 'Conductor ha llegado a tienda. Orden '+order.number);
           audio_journey.play();
           orderAlert.driverArrived = true;
         }
