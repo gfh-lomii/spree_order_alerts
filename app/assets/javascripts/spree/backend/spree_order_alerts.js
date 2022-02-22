@@ -53,25 +53,25 @@ function activeNotification() {
     }).done(function (data) {
       orderAlert.newOrder = false;
       orderAlert.driverArrived = false
-      data.orders.forEach(function (order) {
-        if(order.payment_state === 'paid' && order.taked_order === true && order.journey_state === 'arrived') {
+      data.orders.forEach(function (obj) {
+        if(obj.order.payment_state === 'paid' && obj.order.taked_order === true && obj.order.journey_state === 'arrived') {
           if (!orderAlert.appendSourceJourney) {
             $('body').append('<audio id="myAudioJourney" style="display: none;" controls autoplay><source src="https://freesound.org/data/previews/254/254678_1835926-lq.mp3" crossorigin="anonymous" type="audio/mpeg"></audio>');
             orderAlert.appendSourceJourney = true;
           }
           var audio_journey = document.getElementById("myAudioJourney")
-          show_flash('alert', 'Conductor ha llegado a tienda. Orden '+order.number);
+          show_flash('alert', 'Conductor ha llegado a tienda. Orden '+obj.order.number);
           audio_journey.play();
           orderAlert.driverArrived = true;
         }
 
-        if (order.payment_state === 'paid' && order.taked_order !== true) {
+        if (obj.order.payment_state === 'paid' && obj.order.taked_order === false && (obj.ship_address !== null && obj.ship_address.global === false)) {
           var audio = document.getElementById("myAudio");
           if (!orderAlert.appendSource) {
             $('body').append('<audio id="myAudio" style="display: none;" controls autoplay><source src="https://freesound.org/data/previews/171/171671_2437358-lq.mp3" crossorigin="anonymous" type="audio/mpeg"></audio>');
             orderAlert.appendSource = true;
           } else {
-            show_flash('error', 'Nueva Orden '+order.number);
+            show_flash('error', 'Nueva Orden '+obj.order.number);
             audio.play();
             orderAlert.newOrder = true;
             // reload only on orders index page
@@ -82,8 +82,8 @@ function activeNotification() {
               }, 4000)
             }
           }
-        } else if (data.orders.every(function (order) {
-          return order.shipment_state === 'shipped'
+        } else if (data.orders.every(function (obj) {
+          return obj.order.shipment_state === 'shipped'
         })) {
           show_flash('success', 'Todo tranqui');
         }
