@@ -52,25 +52,26 @@ function activeNotification() {
       }
     }).done(function (data) {
       orderAlert.newOrder = false;
-      orderAlert.driverArrived = false
       data.orders.forEach(function (obj) {
         if(obj.order.payment_state === 'paid' && obj.order.taked_order === true && obj.order.journey_state === 'arrived') {
           if (!orderAlert.appendSourceJourney) {
             $('body').append('<audio id="myAudioJourney" style="display: none;" controls autoplay><source src="https://freesound.org/data/previews/254/254678_1835926-lq.mp3" crossorigin="anonymous" type="audio/mpeg"></audio>');
             orderAlert.appendSourceJourney = true;
           }
-          var audio_journey = document.getElementById("myAudioJourney")
-          show_flash('alert', 'Conductor ha llegado a tienda. Orden '+obj.order.number);
-          audio_journey.play();
-          orderAlert.driverArrived = true;
+          if (orderAlert.appendSourceJourney) {
+            var audio_journey = document.getElementById("myAudioJourney")
+            audio_journey.play();
+            tempAlert('Conductor ha llegado a tienda. Orden '+obj.order.number,3000)
+          }
         }
 
         if (obj.order.payment_state === 'paid' && obj.order.taked_order === false && (obj.ship_address !== null && obj.ship_address.global === false)) {
-          var audio = document.getElementById("myAudio");
           if (!orderAlert.appendSource) {
             $('body').append('<audio id="myAudio" style="display: none;" controls autoplay><source src="https://freesound.org/data/previews/171/171671_2437358-lq.mp3" crossorigin="anonymous" type="audio/mpeg"></audio>');
             orderAlert.appendSource = true;
-          } else {
+          }
+          if (orderAlert.appendSource) {
+            var audio = document.getElementById("myAudio");
             show_flash('error', 'Nueva Orden '+obj.order.number);
             audio.play();
             orderAlert.newOrder = true;
@@ -93,4 +94,16 @@ function activeNotification() {
         show_flash('error', message.statusText)
     })
   }, 6000);
+}
+
+function tempAlert(msg,duration)
+{
+ var temp_alert = document.createElement("div");
+ temp_alert.setAttribute('id', 'alert_journey_arrived')
+ temp_alert.setAttribute("style","position:absolute; top:10%; left:30%; border:2px solid #000; background: #fff; padding: 15px; text-align: center; box-shadow: 5px 5px 20px 5px rgba(0,0,0,0.2); border-radius: 1.5px; width: 50%; font-weight: 600; font-size: 1.3em; color: #595959; text-transform: none; word-wrap: break-word; z-index: 9999; position: fixed;");
+ temp_alert.innerHTML = msg;
+ setTimeout(function(){
+  temp_alert.parentNode.removeChild(temp_alert);
+ },duration);
+ document.body.appendChild(temp_alert);
 }
